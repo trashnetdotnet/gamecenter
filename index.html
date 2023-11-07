@@ -1,0 +1,1410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" lang="en" xml:lang="en">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+ 
+
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+      This framework and functionality is based on this: https://github.com/vlandham/scroll_demo
+      For a full rundown of the theory behind it, see: http://vallandingham.me/scroller.html
+      We have tweaked to make it populoate more dynamically, and include interactive goodies like
+      WebGL, SVG, etc. in the <vis> div created for the original interactive it was intended for.
+
+     |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+ 
+ <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<meta name="Description" content="Threespot Media LLC | Browser-Based Storytelling">
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<title>AU Game Center</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>  
+	<link rel="stylesheet" type="text/css" href="css/scrollyer_storytelling.css"/>
+  <script type="text/javascript" src="js/scrollyer_content.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen,print" href="css/paint.css" />
+ 
+
+ 
+  <script type="text/javascript">
+     function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+  </script>
+
+
+
+
+ <style type="text/css">
+    
+#cbg {
+margin: 0;
+padding:0;
+ z-index:9;
+top:0;
+left:0;
+    display: inline-block;
+ }
+
+
+
+
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+.mySlides {display: none;   width: 100%;
+   height: 100%;
+}
+
+
+
+</style>
+
+
+
+   <style>
+
+
+    .slideshow {
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+.slide {
+  display: none;
+}
+
+.slider_slide {
+   width: 100%;
+   height: 100%;
+  /* max-width: 900px; */
+   display: none;
+
+}
+.slider_slide:first-child {
+    display: block;
+   width: 100%;
+   height: 100%;
+
+}
+.slider_slide > img {
+   width: 100%
+
+}
+.slider_nav {
+   padding: 15px;
+   opacity: 1;
+}
+
+.slider_pagination {
+     z-index: 9999999999999999999999;
+   bottom: 0;
+   right: 0;
+   position: fixed;
+opacity: 0;
+}
+.slider_pagination_btn {
+   display: inline-block;
+   padding: 6px;
+   cursor: pointer;
+   border: none;
+   outline: none;
+   background-color: transparent;
+   opacity: .3;
+
+}
+.slider_pagination_btn:before {
+   content: '';
+   display: inline-block;
+   padding: 6px;
+   border-radius: 100%;
+   background-color: #ccc;
+   opacity: .3;
+}
+.slider_pagination_btn:hover:before {
+   background-color: #aaa;
+}
+.slider_pagination_btn:focus:before {
+   background-color: #777;
+}
+.slider_pagination_btn.slider_pagination_btn--sel:before {
+   background-color: #333;
+}
+
+.scroll-blk{
+     padding: 8px 8px 0px;
+    position: relative;
+    margin:15px auto;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .scroll-text{
+    overflow-y: auto;
+    height: 100vh;
+    overflow-x: hidden;
+     text-align: left;
+    padding: 5px;
+    box-sizing: border-box;
+   }
+  .scroll-text h4 {
+    margin: 0 0 3px 0px;
+    font-size: 12px;
+    color: #b5141c;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+   }
+  .scroll-text p{
+    margin: 0px;
+    font-size: 12px;
+    color: #000;
+     padding-bottom: 5px;
+  }
+  .info-text{
+    text-align: center;
+    font-size: 11px;
+    text-decoration: underline;
+    line-height: 1.2;
+    color: #fff;
+    margin-top: 5px;
+    font-family: 'MyriadPro-Regular';
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+.board { 
+
+    height: 100vh; 
+
+    width: 100vw; 
+
+ position: fixed;
+ top: 0;
+ left: 0;
+     z-index: 99999999999999999999999999;
+} 
+
+  
+.ball { 
+
+    height: 30px; 
+
+    width: 30px; 
+
+    border-radius: 50%; 
+
+    position: fixed; 
+
+    top: calc(50% - 15px); 
+
+    left: calc(50% - 15px); 
+
+        z-index: 99999999999999999999999999;
+
+} 
+
+  
+.ball_effect { 
+
+    height: 100%; 
+
+    width: 100%; 
+
+    border-radius: 100px; 
+
+    animation: spinBall 0.1s linear infinite; 
+
+    box-shadow: inset 0 0 18px #fff, 
+
+        inset 6px 0 18px violet, 
+
+        inset -6px 0 18px #0ff, 
+
+        inset 6px 0 30px violet, 
+
+        inset -6px 0 30px #0ff, 
+
+        0 0 18px #fff, -4px 0 18px
+
+        violet, 4px 0 18px #0ff; 
+} 
+
+  
+@keyframes spinBall { 
+
+    100% { 
+
+        -webkit-transform: rotate(360deg); 
+
+        transform: rotate(360deg); 
+
+    } 
+} 
+
+  
+.paddle { 
+
+    height: 100px; 
+
+    width: 18px; 
+
+  /*  border-radius: 50%; */
+
+    position: fixed; 
+
+} 
+
+  
+
+.paddle_1 { 
+
+  /*  top: calc(7.5vh + 55px); */
+  top: 0;
+
+    /* left: calc(10vw + 30px); */
+    left: calc(1px); 
+
+    box-shadow: inset 0 0 18px #fff, 
+
+        inset -6px 0 18px #f3bad6, 
+
+        inset 6px 0 18px #0ff, 
+
+        inset -6px 0 30px #f3bad6, 
+
+        inset 6px 0 30px #0ff, 
+
+        0 0 18px #fff, 4px 0 18px
+
+        #f3bad6, -4px 0 18px #0ff; 
+
+            z-index: 99999999999999999999999999;
+                        opacity: 0;
+
+
+} 
+
+  
+
+.paddle_2 { 
+
+  /*  top: calc(85vh + 7.5vh - 100px - 55px); */
+  top: 0;
+
+  /*  right: calc(10vw + 30px); */
+    right: calc(1px); 
+
+    box-shadow: inset 0 0 18px #fff, 
+
+        inset 6px 0 18px #f3bad6, 
+
+        inset -6px 0 18px #0ff, 
+
+        inset 6px 0 30px #f3bad6, 
+
+        inset -6px 0 30px #0ff, 
+
+        0 0 18px #fff, -4px 0 18px
+
+        #f3bad6, 4px 0 18px #0ff; 
+
+            z-index: 99999999999999999999999999;
+            opacity: 0;
+
+} 
+
+  
+
+.player_1_score { 
+
+    height: 50px; 
+
+    width: 50px; 
+
+    color: chartreuse; 
+
+    position: fixed; 
+
+    left: 30vw; 
+
+    margin-top: 30px; 
+    opacity: 0;
+} 
+
+  
+
+.player_2_score { 
+
+    height: 50px; 
+
+    width: 50px; 
+
+    color: chartreuse; 
+
+    position: fixed; 
+
+    left: 70vw; 
+
+    margin-top: 30px; 
+    opacity: 0;
+} 
+
+  
+.message { 
+
+    position: fixed; 
+
+    /* color: #48426d; */
+
+    height: 10vh; 
+
+    width: 30vw; 
+
+    color: #c9cbff; 
+
+    left: 38vw; 
+
+    margin: 30px auto auto auto; 
+    opacity: 0;
+} 
+
+
+#playPongplayPong { 
+  opacity: .5;
+display: block;
+position: fixed;
+z-index: 9999999999999999999099999;
+bottom: 30px;
+right: 30px;
+width:15px;
+height: 15px;
+background-color: #333;
+   }
+
+
+   </style>
+
+
+
+
+</head>
+
+ <body> 
+
+ 
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||| VIDEO ELEMENT ACTIVATE IN daddy .js file |||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||| Uncomment to use vid & make changes to function  |||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  
+     |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+ <video autoplay playsinline muted loop id="bgvid7" class="videobig" style="display: none;">
+     <source src="images/mia_x_nike_sb.webm" type="video/webm">
+     <source src="images/mia_x_nike_sb.mp4" type="video/mp4">
+</video>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||| SITE FURNITURE |||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||  LOADER |||||||||||||||||||||||||||||||||||| -->
+
+<div id="play" style="display: none;">
+  <div id="loader">
+  </div>
+</div>
+
+
+<div id="playB" style="display: none;">
+</div>
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<div id="threespotinfo" class="bgbg" style="display:none; " onclick="toggle_visibility('threespotinfo');toggle_visibility('closeB');toggle_visibility('CanvasImgBB');">
+<span class="abouttitle">.</span>
+<br />
+<div class="revolution"><!--  <img src="images/revolution.png" border="0" alt="revolution" width="100%"> --></div>
+<br />
+<br />
+ <span class="aboutbody">.
+<br />
+
+ 
+ 
+ 
+ 
+  <div class="Billboard-content l-wrap">
+    <div class="Billboard-links">
+      <a id="ourworkbtn" class="Billboard-cta Button Button--yellow bg-grunge--mask" href="https://www.threespot.com/our-work" target="_blank">Our Work</a>
+      <a id="aboutusbtn" class="Billboard-cta Button Button--yellow bg-grunge--mask" href="https://www.threespot.com/about-us" target="_blank">About Us</a>
+    </div>
+  </div>
+  
+  
+  
+   
+
+</span>
+
+
+</div>
+<div id='spotsabout'><img src="images/threedots3.png" style="display: none; "></div>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| BOTTOM LEFT DIV ||||||||||||||||||||||||||||||||| 
+ <div id="output">
+ </div>
+ |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+  
+  
+
+      <div id="sequence" style="display:none;"></div>
+      <div id="chart" style="display:none;">
+      </div>
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- ||||| center of sgarburst graphic |||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<div id="explanation" style="visibility: hidden;">
+<span id="percentage"></span><br/>
+of visits begin with this sequence of pages
+</div>
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+ <img src='data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw=='
+                 id="CanvasImg" style="visibility: hidden; " />
+ 
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+ <img src='data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw=='
+                 id="CanvasImgB" style="display: none; " />
+ 
+
+
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+ <img src='data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw=='
+                 id="CanvasImgBB" style="display: none; " />
+ 
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+ <img src='data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw=='
+                 id="CanvasImgA" style="visibility: hidden; " />
+ 
+
+
+  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+ <img src='data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw=='
+                 id="CanvasImgBG" style="visibility: hidden; " />
+ 
+
+
+ 
+  
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| TABLE OF CONTENTS ||||||||||||||||||||||||||||||| -->
+<div id="toc" onclick="toggle_visibility('toc');toggle_visibility('close');toggle_visibility('menu');"> 
+<br />
+<img src="images/3DOTS.png" border="0" style="display: none;position: absolute;top: 1em; ">
+<br />
+<br />
+A showcase of AU Game Center.
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||
+
+<ol>
+<li><a href=#>We Fight Status Quo</a></li>
+
+||||||||||||||||||||||| -->
+
+
+<script type="text/javascript">
+ 
+
+var pp = 1;
+var ppc = (pp+1);
+var body = "";
+
+while (titles[pp]) {
+ /////////////   text += heads[h] + "<br>";
+    
+////////body+= '<li><!-- ### '+pp+' ### --><a href=#j'+pp+'>'+titles[pp] + '</a><!-- ######### --></li>';
+
+
+///     console.log(p);
+///     console.log('html'+p);
+////     console.log('con'+p);
+
+    pp++;
+    ppc++
+}
+
+///////////////body+= '</ol>';
+
+document.write(body);
+ 
+
+</script>
+
+
+
+
+
+
+</div>
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| This is where the content lives ||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Main container div |||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Graphic div is the parent for scrolling ||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Containers have bgs and top bars |||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- ||||| Section contains steps which are the scrolling text |||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+<div class="container" id="container">
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| TOP LEFT LOGO ||||||||||||||||||||||||||||||||||| 
+<div id="logo"><img src="images/3spotbrush3.png" onclick="toggle_visibility('threespotinfo');toggle_visibility('closeB');toggle_visibility('playB');" style="cursor: pointer;"></div>
+-->
+<div id="logo"><a href="#" onclick="toggle_visibility('threespotinfo');toggle_visibility('closeB');toggle_visibility('CanvasImgBB');"><!-- <img src="images/3spotbrush3.png" style="cursor: pointer;" border=0 alt="Threespot Media LLC"> --></a></div>
+
+
+
+
+<div id='spots'><img src="images/augclogo.png" style="cursor: pointer;"></div>
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<div id='threespotA'><!-- <img src="images/301a.png" style="cursor: pointer; "> --></div>
+<div id='threespotB'><!-- <img src="images/302a.png" style="cursor: pointer; "> --></div>
+<div id='threespotC'><!-- <img src="images/303a.png" style="cursor: pointer; "> --></div>
+<div id='threespotD'><!-- <img src="images/304a.png" style="cursor: pointer; "> --></div>
+<div id="strokepaint"></div>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| TOP RIGHT MENU |||||||||||||||||||||||||||||||||| -->
+<div id="menu" style="cursor: pointer; display: none;">
+    <img src="images/3menub.png" alt="Threespot" border="0" align="right" onclick="toggle_visibility('toc');toggle_visibility('close');">
+</div>
+<div id="close" style="cursor: pointer;display: none;">
+    <img src="images/close.png" alt="Threespot" border="0" align="right" onclick="toggle_visibility('toc');toggle_visibility('close');">
+</div>
+<div id="closeB" style="cursor: pointer;display: none;">
+    <img src="images/close.png" alt="Threespot" border="0" align="right" onclick="toggle_visibility('threespotinfo');toggle_visibility('closeB');toggle_visibility('CanvasImgBB');">
+</div>
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<div id="graphic">
+
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| add a static title container |||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<div id=container0>
+<div id=topbar0></div><canvas id="cbg"></canvas>
+<div class=bgbg id=big0>
+
+
+</div></div>
+
+  
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| OUTPUT THE REST OF THE SLIDES ||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| FIND THE CONTENT IN content.js |||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| CALCULATES ARRAY OF HEADS FOR OUTPUT |||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+<script type="text/javascript">
+
+var h = 1;
+var text = "";
+
+while (heads[h]) {
+ /////////////   text += heads[h] + "<br>";
+
+///////////////text+= '<div id=container'+h+'><div id=topbar>'+heads[h] + '</div><div id=big'+h+' class=bgbg style=background-image:url('+h+'.jpg); ></div></div>';
+
+text+= '<div id=container'+h+'><a name=j'+h+'></a><div id=topbar><span class=copyblock>'+heads[h] + '</span></div><div id=big'+h+' class=bgbg></div></div>';
+
+    h++;
+}
+
+document.write(text);
+
+
+</script>
+
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+
+
+<div id="sections">
+<!-- ##################### <div id="strokepaint"></div> -->
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| add a static step container ||||||||||||||||||||| -->
+<!-- |||||||||||| the title slide with scroll prompt |||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+<!-- ### 0 ### -->
+<section class="step" style="background:none !important; position: fixed !important; ">
+  <div class="slider">
+    <!-- 
+
+-->
+
+   <div class="slider_slides-cont">
+
+
+ 
+
+
+
+      <div class="slider_slide">
+<div id="slideWrapper">
+
+<div id="bigBox" style="width: 40%; vertical-align: middle !important; ">
+
+<img src="images/gcblack.png" border="0" alt="AU Game Center Logo" style="width: 40%;">
+</div>
+<div class="titleopener" style="width: 60% !important;padding-left: .8em; ">
+American University Game Center
+<span class="introbody">
+ <span class="subHeader">AU Game Center is a unique multi-disciplinary academic research center operating through a partnership between the School of Communication and the College of Arts & Sciences with core activities of the center are clustered in three interlocking areas:</span>
+<br />
+<br />
+<ol>
+<li>World-class academic programs exploring games and interactive media in a variety of contexts that are based on experiential education approaches and innovative production experiences;</li>
+<li>Critical research, artistic exploration, and in-depth analysis of games as a media form;</li>
+<li>Field-defining service and policy initiatives as they pertain to games and game education.</li>
+</ol>
+</span> 
+
+</span> 
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="slider_slide">
+<div id="slideWrapper">
+
+<div id="bigBox" style="width: 40%; ">
+
+<img src="images/locallyplayed.jpg" border="0" alt="locally played book" style="width: 40%;  ">
+</div>
+<div class="titleopener" style="width: 60% !important; ">
+LOCALLY PLAYED
+<span class="introbody">
+ <span class="subHeader"> Real-World Games for Stronger Places and Communities</span>
+  <BR />
+  <BR />
+<em>By Dr. Benjamin Stokes</em>  
+  <br />
+  <em>Director, Playful City Lab</em> 
+  <BR />
+  <BR />
+Dr. Benjamin Stokes shows how impact is greatest when games "fit" to the local community—not just in terms of culture, but at the level of group identity and network structure. By pairing design principles with a range of empirical methods, Stokes investigates the impact of several games, including Macon Money, where an alternative currency encouraged people to cross lines of socioeconomic segregation in Macon, Georgia; Reality Ends Here, where teams in Los Angeles competed to tell multimedia stories around local mythology; and Pokémon GO, appropriated by several cities to serve local needs through local libraries and open street festivals. 
+  <BR />
+  <BR />
+Locally Played provides game designers with a model to strengthen existing networks tied to place and gives city leaders tools to look past technology trends in order to make a difference in the real world. 
+</span> 
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="slider_slide">
+<div id="slideWrapper">
+
+<div id="bigBox" style="width: 50%;">
+
+
+<div class="scroll-blk">
+<div class="scroll-text" id="data">
+  <span class="introbody">
+
+Kelly Boudreau, N.D. Bowman, Andrew Phelps, & Mia Consalvo (forthcoming Jan 2024). Playing the (Streaming) Fame Game: (Re)presentations of success, challenges, and demand in streaming simulation games. Proceedings of 57th Hawaiian International Conference on System Sciences. (HICSS 57)
+
+<br /><br /> Phelps, A., Consalvo, M., Boudreau, K., and Bowman, N.D. (forthcoming 2024). “Perspectives on Microstreaming: Labor, Interactivity and Authenticity” in Bowman, N. (Ed.), Emerging issues for emerging technologies: Informed provocations for theorizing media futures. Peter Lang. (in press)
+
+<br /><br /> Dashiell, S. and Phelps, A. (forthcoming, 2023). The Real Halflings of Waterdeep: The Intersection of Reality Television and Audience Motivation in Tabletop Role Playing Actual Play. Proveedings of the 2023 Association of Internet Researchers Conference. Philadelphia, Pennsylvania.
+
+<br /><br /> Bowman, N. D., Lee, Y., Chen, S., Phelps, A., Consalvo, M., & Boudreau, K. (forthcoming 2023). Unscripted, Unproduced, Unstaged: Audience Perceptions of Authenticity of Microstreamers. In Extended Abstracts of the 2023 Annual Symposium on Computer-Human Interaction in Play, October 10–13, 2023, Stratford, ON, Canada. ACM, New York, NY, USA. 10 pages. https://doi.org/10.1145/3573382.3616077
+
+<br /><br /> Consalvo, M., Phelps, A., Grace, L. and Altizer, R. (forthcoming November 2023) The Ethical Colonizer? Grand Strategy Games, Colonization, and New Ways of Engaging Moral Choices. In Proceedings of the International Conference on Interactive Digital Storytelling 2023 (ICIDS 2023). Kobe, Japan.
+
+<br /><br />Dashiell, S., & Phelps, A. (2023). Analyzing gender capital in Grand Theft Auto social media conversations. Media, Culture & Society, 0(0). https://doi.org/10.1177/01634437231185949.
+
+<br /><br />Phelps, A., Consalvo, M., Grace, L., Altizer, R., and Koenitz, H. (2023) “Mis/Dis Information and Games Studies in Climate, Health, Culture, and News.” Digital Games Research Association (DiGRA) 2023 International Conference. Seville, Spain.
+
+<br /><br />Phelps, A., Mantegna, M., Duhen, W. and Clement-Jones, T. (2023) “A Constitution for the Metaverse.” Panel Discussion. More Than Just A Game VII, Queen Mary University of London Centre for Commercial Law Studies. London, UK.
+
+<br /><br />Phelps, A. and Dashiell, S. (2023) “Of Platforms and Incongruities of Virtual Party Worlds (There is much more to the party than the house).” Tampere Games Spring Seminar. Center of Excellence for Game Culture Studies, Tampere University, Finland.
+
+<br /><br />Phelps, A. and Consalvo, M. (2023) “A Fantastic Imagination of Digital Disintegration: The Gestalt and Rhetoric of the Atomization of the Social Network.” Northern Star Symposium. Nord University, Bodø, Norway.
+
+<br /><br />Phelps. A. (2023) “A Celebration of Teaching, Researching, & Loving Games.” Gotland Game Conference Education Day. Uppsala University, Gotland Campus, Sweden.
+
+<br /><br />Consalvo, M., Boudreau, K., Bowman, N., and Phelps, A. (2023) "Fame! I wanna stream forever: Analysis and critique of successful streamers’ advice to the next generation" The 56th Annual Hawaiian International Conference on Systems Science (HICSS56). Maui, HI. https://hdl.handle.net/10125/102919
+
+<br /><br />Rusch, Doris C., and Phelps, Andrew M. (2022) "The Magic of The Witch's Way" in The Magic of Games. Nikolaus Koenig, Natalie Denk, Alexander Pfeiffer, and Thomas Wernbacher (Eds.) Donau-Universitat, Krems. pp 55-72. DOI: https://doi.org/10.48341/NCAP-6J40
+
+<br /><br />Phelps, Andrew M. and Rusch, Doris C. (2022) "The Witch's Way: A Transformational Story Adventure" in The International Conference on Interactive Digital Storytelling (ICIDS) 2021 Art Book. Lynda Clark & Raivo Kelomees, Eds. ETC Press, Carnegie-Mellon University, Pittsburg, PA. Pages 65-83.
+
+<br /><br />Consalvo, M. and Phelps, A. (2022) "Re-Reading, Re-Playing, and Re-Experiencing: Similarities, Differences, and Impact Across Games and Books." Tampere Games Summit, Tampere Finland. (work in progress)
+
+<br /><br />Moger, D., Wagner, J. and Phelps, A. (2022) Fake News Cycles: Exploring the Repetitive Design of Disinformation Games. Proceedings of the Games+Learning+Society 2022 Conference. University of California at Irvine. (in press)
+
+<br /><br />Phelps, A., Consalvo, M., Bowman, N.D., and Smyth, S. (2022) "Shared Spaces as Authenticity: Exploring the Connectedness of the Physical Environments of Microstreamers and their Audience" The 55th Annual Hawaiian International Conference on Systems Science (HICSS55). Maui, HI. http://hdl.handle.net/10125/79721
+
+<br /><br />Platt-Young, Zoe., Lukosch., Heide., Phelps, Andy. (2022, August 26-27). Exploration of Immersive Gamed-Based Approaches for Youth Social Anxiety. [Poster Presentation] George Abbott Research Symposium, University of Otago. Christchurch, New Zealand.
+
+<br /><br />Platt-Young, Zoe., Lukosch., Heide., Phelps, Andy (2021, December 1). Exploration of Immersive Gamed-Based Approaches for Youth Social Anxiety. [Poster Presentation] Sports, Health and Rehabilitation Research Cluster Launch Event. Christchurch, New Zealand.
+
+<br /><br />Wagner, J., Moger, D., Consalvo, M., and Phelps, A. (2021) "Helping Grandma Home: Spiritfarer’s Progressive Treatment of Older Adults During COVID-19" in Well Played Retrospective: The Past, Pandemic and Future of Video Games, Value and Meaning by Davidson, Fay, Fernandez-Vara, Pinckard and Sharp. (Eds.) ETC Press, Carnegie-Mellon University. https://press.etc.cmu.edu/index.php/product/well-played-retrospective/
+
+<br /><br />Phelps, A., Bowman, N.D., Consalvo, M., and Smyth, S. (2021, October) "Streaming Small Shared Spaces: Exploring the Connectedness of the Physical Spaces of Microstreamers and their Audience." The 22nd Annual Conference of the Association of Internet Researchers (AOIR2021). Philidelpha, PA. DOI: https://doi.org/10.5210/spir.v2021i0.12224
+
+<br /><br />Rusch, D.C. and Phelps, A. (2021) "The Witch’s Way: A Transformational Story Adventure: Theorizing a Model for Existential, Transformative Game Design via the Creation and Analysis of an Experimental Sample Work." Foundations of Digital Games 2021 Conference (FDG21). Games & Demos. Winner of 2nd place for best-of-show award.
+
+<br /><br />Rusch, D.C. and Phelps, A. (2021) "Games of the Soul." In A Ludic Society by Denk, et al. (pp. 102–126). Donau-Universität Krems, Universitätsbibliothek. ISBN-13: 978-3903150720. Available on Amazon.
+
+<br /><br />Phelps, A., Egert, C., and Cloutier, A. (2021) "MAGIC Production Studio (IGME-580)." In Teaching the Game: A Collection of Syllabi for Game Design, Development and Implementation. Ferdig, Baumgartner, and Gandofli (Eds.) ETC Press. https://press.etc.cmu.edu/index.php/product/teaching-the-game-volume-2/
+
+<br /><br />Phelps, A., Egert, C. & Consalvo, M. (2021) "Hack, Slash & Backstab: A Post-Mortem of University Game Development at Scale" International Journal of Designs for Learning, 12(1), 16–33. DOI: 10.14434/ijdl.v12i1.31263
+
+<br /><br />Consalvo, M. and Phelps, A. (2021) "Game Development Live on Twitch: Observations of Practice and Educational Synergies" O. Sotamaa & J. Svelch (Eds.) Game Production Studies: Cultural Studies of Video Game Industries. Amsterdam, the Netherlands: Amsterdam University Press. https://www.aup.nl/en/book/9789463725439/game-production-studies
+
+<br /><br />Consalvo, M., & Phelps, A. (2021). Getting through a Tough Day (Again): What Possum Springs Says about Mental Health and Social Class. American Journal of Play, 12(3), 338–362. [PDF]
+
+<br /><br />Phelps, A., Consalvo, M., and Bowman, N. (2021) “Streaming Into the Void: An Analysis of Microstreaming Trends and Behaviors Utilizing a Demand Framework.” Presented at the 54th Annual Hawaii International Conference on Systems Science (HICSS), Kauai, HI. [PDF]
+
+<br /><br />.Rusch, Doris C and Andrew M. Phelps (2020) Existential Transformational Game Design: Harnessing the “Psychomagic” of Symbolic Enactment. Frontiers in Psychology. 11:571522. doi: 10.3389/fpsyg.2020.571522
+
+<br /><br />Lukosch, H. and Phelps, A. M. (2020, May 08). Online plagues, protein folding and spotting fake news: what games can teach us during the coronavirus pandemic. The Conversation. https://theconversation.com/online-plagues-protein-folding-and-spotting-fake-news-what-games-can-teach-us-during-the-coronavirus-pandemic-137490
+
+<br /><br />Phelps, A. M. (2020, April 14). Gaming fosters social connection at a time of physical distance. The Conversation. http://theconversation.com/gaming-fosters-social-connection-at-a-time-of-physical-distance-135809
+
+<br /><br />Consalvo, Mia, and Andrew Phelps. “Teaching Students How to Make Games for Research-Creation/Meaningful Impact: (Is Hard).” International Conference on the Foundations of Digital Games, Association for Computing Machinery, 2020, pp. 1–7. ACM Digital Library, doi:10.1145/3402942.3402990
+
+<br /><br />Phelps, A., Wagner, J. and Moger, A. (2020) "Experiential Depression and Anxiety Through Proceduralized Play: A Case Study of Fragile Equilibrium." Journal of Games, Self, and Society. (2) v.1. p.104-149. https://doi.org/10.1184/R1/12215417
+
+<br /><br />Rusch, Doris C. and Phelps, A. (2020) "Navigating Existential, Transformative Game Design." Digital Games Research Association (DiGRA) 2020. Center of Excellence in Game Culture Studies. Tampere, Finland. (in-person presentation at DiGRA2021 due to COVID-19)
+
+<br /><br />Consalvo, M. and Phelps, A. (2020) "Banal, boring, or bad: Studying the understudied in game studies." Digital Games Research Association (DiGRA) 2020. Center of Excellence in Game Culture Studies. Tampere, Finland. (in-person presentation at DiGRA2021 due to COVID-19)
+
+<br /><br />Phelps, A. & Consalvo, M. (2020) Laboring Artists: Art Streaming on the Videogame Platform Twitch. Proceedings of the 53rd Annual Hawaii International Conference on Systems Science, Maui, HI. http://hdl.handle.net/10125/64068
+
+<br /><br />Egert, C. and Phelps, A. (2019) "Balancing Entertainment and Educational Objectives in Academic Game Creation: A Production Focused Studio Classroom Approach." Farber, M. (Ed.) Global Perspectives on Gameful and Playful Teaching and Learning. Hershey, PA: IGI Global. https://www.igi-global.com/book/global-perspectives-gameful-playful-teaching/235397
+
+<br /><br />Phelps, A., C. Egert and A. Decker. (2019) "Splattershmup: A Game of Art & Motion". Learning in Games Book 3. Ed. K. Schrier. p364-368. ETC Press, Carnegie Mellon University. Online: http://press.etc.cmu.edu/index.php/product/learning-education-games-volume-3/
+
+<br /><br />Phelps, A. & Consalvo, M. (2019) "Development Streaming and Authenticity: Cultural Connections, Democracy and Potential Platforms of Engagement" Media in Transition 10. Boston, MA.
+
+<br /><br />Consalvo, M., & Phelps, A. (2019). Performing Game Development Live on Twitch. Proceedings of the 52nd Annual Hawaii International Conference on Systems Science, Maui, HI. p. 2438-2447. Retrived online: http://hdl.handle.net/10125/59682
+
+<br /><br />Phelps, A., Consalvo, M., and Egerct, C. Development Streamming as a Pedagogical and Community Strategy for Games Education. Presented at the Workshop on New Research Perspectives on Game Design & Development Education. CHI PLAY 2018, October 28, 2018, Melbourne, Australia.
+
+<br /><br />Decker, A., Egert. C, and Phelps, A. "Learning to Create or Creating to Learn" International Academic Conference on Meaningful Play, October 11, 2018, p288-304. East Lansing, Michigan. ETC Press. Online: http://press.etc.cmu.edu/index.php/product/proceedings-of-meaningful-play-2018/
+
+<br /><br />Decker A., Phelps A., Egert C.A. (2017) Trial by a Many-Colored Flame: A Multi-disciplinary, Community-Centric Approach to Digital Media and Computing Education. In: Fee S., Holland-Minkley A., Lombardi T. (eds) New Directions for Computing Education. Springer, Cham. https://doi.org/10.1007/978-3-319-54226-3_14
+
+<br /><br />Decker, A., Phelps, A., ∓ Egert, C. A. (2017). Disappearing Happy Little Sheep: Changing the Culture of Computing Education by Infusing the Cultures of Games and Fine Arts. Educational Technology, 57(2), 50–54. http://www.jstor.org/stable/44430524
+
+<br /><br />Vullo, R., Phelps, A. and Catalfamo, M. (2016) “DIY VR: The Development of an Inexpensive Headset for Makers” Proceedings of the International Conference on Internet Computing and Internet of Things | ICOMP'16 , pp. 140-44. http://worldcomp-proceedings.com/proc/p2016/ICM3408.pdf
+
+<br /><br />A. Decker, C. A. Egert and A. Phelps, "Splat! er, shmup? A postmortem on a capstone production experience," 2016 IEEE Frontiers in Education Conference (FIE), 2016, pp. 1-9, doi: 10.1109/FIE.2016.7757399. https://ieeexplore.ieee.org/document/7757399
+
+</span>
+</div> 
+</div> 
+
+      </div>
+ 
+<div class="titleopener" style="width: 50% !important;padding-left: .2em; ">
+  
+Dr. Andrew "Andy" Phelps
+<br />
+<span style="font-size: .3em !important;">Director, AU Game Center</span>
+
+<br />
+ 
+<img src="images/andy_books.jpg" border="0" alt="Dr. Andrew Andy Phelps" style="vertical-align: middle;">
+</div>
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="slider_slide">
+<div id="slideWrapper">
+
+<div id="bigBox" style="width: 40%; ">
+
+<img src="images/playfullcities.png" border="0" alt="playful city class" style="width:40%;">
+</div>
+<div class="titleopener" style="width: 60% !important; ">
+<span style="font-size: .3em !important;">Spring 2024: GAME-596 / COMM-587</span>
+<br />
+Playful Cities:
+  <br />
+ <span class="introbody">
+<span class="subHeader">Design for Interactive Storytelling and Community Engagement</span> 
+<br >
+<br >
+<span style="font-size: 1.4em; line-height: 1.2em;padding-top: 1em; "><span style="color: yellow; ">NEW LISTING: </span><em>Professor Benjamin Stokes of SOC & AU Game Center Tuesdays 5:30-8:800pm in MBTI 117</em>  </span>
+  <BR />
+  <BR />
+Play on the urbaan streets and in public can shape our sense of place, bring history and local news to life, and connect neiighbors. Students in this class will create interactive stories and local games, with no knowledge of programming required.
+<br /><br />
+We will use simple tools to create playable prototypes from branching audio hotlnies to GPS scavenger hunts, narratives that are triggered by the weather, and secret messages tied to our Metro Cards. Class discussion will consider impliications for tourism, community organizing, and local engagement.
+<br />
+<br />
+This course will tap communications strategies for behavioral change, collective storytelliinig and buildinig group identity. From PR to activism, the battle for neighborhood engagement will increasingly use interactive media. Some of the most innovative strategies are emerging with game-based activities and place-based storytelling. We will probe how playful tactics are distictly powerful, including for crossing generations and reclaiming space.
+<br /><br />
+<span style="font-size: 1.4em; line-height: 1.2em;padding-top: 1em; ">Email the professor wiith any questions: <span style="color: yellow; ">bstokes@american.edu</span> </span> 
+</span> 
+</div>
+</div>
+</div>
+
+
+
+ 
+
+ 
+
+
+
+
+
+      <div class="slider_slide">
+<div id="slideWrapper">
+
+<div id="bigBox" style="width: 40%; vertical-align: middle !important;padding-top: 4em; ">
+
+<img src="images/Ember&Pugg.png" border="0" alt="MAGFest Art" style="width:40%;">
+</div>
+<div class="titleopener" style="width: 60% !important; ">
+<span style="font-size: .3em !important;">JANUARY 18-21, 2024 – NATIONAL HARBOR, MD</span>
+<br />
+SUPER MAGFEST
+  <br />
+<span class="introbody">
+ <span class="subHeader">MAKE THE WORLD A BETTER PLACE THROUGH VIDEO GAMES.</span> 
+  <BR />
+  <BR />
+
+  Short for "Music And Gaming Festival," MAGFest is a four day-long event dedicated to the appreciation of video game music, gaming of all types, and the gaming community. The event runs 24 hours a day, and offers consoles, arcades, tabletop, LAN, live video game cover bands, chiptunes, vendors, guest speakers, and much much more.
+
+
+<br /><br />
+<span style="font-size: 1.4em; line-height: 1.2em;padding-top: 1em; color: yellow; ">Register: super.magfest.org</span>
+</span> 
+</div>
+</div>
+</div>
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+       <div class="slider_slide">
+
+<div id="slideWrapper">
+
+
+
+ <video autoplay playsinline muted loop id="bgvid7" class="videobig" style="display: block;">
+     <source src="images/mia_x_nike_sb.webm" type="video/webm">
+     <source src="images/mia_x_nike_sb.mp4" type="video/mp4">
+</video>
+
+</div>
+</div>
+
+   
+
+
+
+
+   </div>
+</div>
+
+
+   
+</section>
+
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| OUTPUT THE REST OF THE STEPS |||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| FIND THE CONTENT IN content.js |||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| CALCULATES ARRAY OF TITLES FOR OUTPUT ||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| CLose out the sections |||||||||||||||||||||||||| -->
+
+    </div>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| The vis div that holds interactive goodies |||||| -->
+
+
+  <div class="board" id="board"> 
+
+        <div class='ball' id="ball"> 
+
+            <div class="ball_effect"></div> 
+
+        </div> 
+
+        <div class="paddle_1 paddle" id="paddle_1"></div> 
+
+        <div class="paddle_2  paddle" id="paddle_2"></div> 
+
+        <h1 class="player_1_score">0</h1> 
+
+        <h1 class="player_2_score">0</h1> 
+
+        <h1 class="message"> 
+
+ 
+        </h1> 
+
+    </div> 
+
+
+
+
+<div id="playPongplayPong" onclick=playPong()> </div>
+
+ 
+  <div class="slider_pagination" style="display: none; "></div>
+  <button class="slider_nav">&larr; Previous</button>
+   <button class="slider_nav">Next &rarr;</button>
+
+
+
+    <div id="vis">
+  </div>
+ 
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Close container and graphic ||||||||||||||||||||| -->
+
+ </div>
+</div>
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+ <script src="js/d3.v3.min.js"></script>
+
+
+<script src="js/topojson.v1.min.js"></script>
+<script type="text/javascript" src="js/queue.js"></script>
+<script type="text/javascript" src="js/scroller_timer.js"></script>
+<script type="text/javascript" src="js/three.js"></script>
+<script type="text/javascript" src="js/CanvasRenderer.js"></script>
+<script type="text/javascript" src="js/Projector.js"></script>
+<script src="https://d3js.org/queue.v1.min.js"></script>
+<script type="text/javascript" src="js/04vr.js"></script>
+<script type="text/javascript" src="js/paintjs.js"></script>
+<script type="text/javascript" src="js/paint.js"></script>
+<script type="text/javascript" src="js/DeviceOrientationControls.js"></script>
+ <script type="text/javascript" src="js/lineswords.js"></script>
+<!--  <script type="text/javascript" src="js/pong.js"></script> -->
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| dormant interactive goodies |||||||||||||||||||||
+<script type="text/javascript" src="js/FlyControls.js"></script>
+<script type="text/javascript" src="js/topojson.v0.min.js"></script>
+     ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  -->
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Daddy JS file ||||||||||||||||||||||||||||||||||| -->
+
+<script src="js/scrollyer_storytelling_timer.js"></script>
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- |||||||||||| Preloader ||||||||||||||||||||||||||||||||||||||| -->
+
+<div class="hidden">
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+ 
+      var images = new Array()
+      function preload() {
+        for (i = 0; i < preload.arguments.length; i++) {
+          images[i] = new Image()
+          images[i].src = preload.arguments[i]
+        }
+        
+          
+
+
+
+
+      }
+images.onload = notify();
+
+      function notify()  {
+
+        setTimeout(function(){ 
+
+          document.getElementById('play').style.display = 'none'; 
+
+
+
+
+/////showSlides(); 
+
+
+ 
+
+        }, 1000);
+
+        
+}
+
+
+      preload(
+     
+
+      )
+    //--><!]]>
+  </script>
+</div>
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+ 
+
+
+<script>
+
+
+var currentIndex = 0;
+var newIndex = 0;
+
+var slideElements = document.getElementsByClassName('slider_slide');
+var slidesLength = slideElements.length;
+var paginationElement = document.getElementsByClassName('slider_pagination')[0];
+var navElements = document.getElementsByClassName("slider_nav");
+
+function navigateSlider() {
+   if (newIndex === -1) {
+      newIndex = slidesLength - 1;
+
+   }
+   else if (newIndex === slidesLength) {
+      newIndex = 0;
+   }
+
+   paginationElement.childNodes[currentIndex].classList.remove('slider_pagination_btn--sel');
+   paginationElement.childNodes[newIndex].classList.add('slider_pagination_btn--sel');
+
+   slideElements[currentIndex].style.display = "none";
+   slideElements[newIndex].style.display = "block";
+   currentIndex = newIndex;
+
+  if (autoplay) {
+   setTimeout(function() {
+      newIndex++;
+      console.log(newIndex)
+      if (newIndex==2) {autoplayInterval = 24000;} else if (newIndex==1) {autoplayInterval = 14000;} else if (newIndex==0) {autoplayInterval = 14000;}else if (newIndex==4) {autoplayInterval = 24000;} else if (newIndex==3) {autoplayInterval = 14000;} else {autoplayInterval = 14000;}
+      navigateSlider();
+   }, autoplayInterval);
+  clearTimeout(autoplay);
+}
+
+}
+
+navElements[0].addEventListener('click', function() {
+   newIndex--;
+   navigateSlider();
+});
+
+navElements[1].addEventListener('click', function() {
+   newIndex++;
+   navigateSlider();
+});
+
+var paginationHTML = [];
+for (var i = 0; i < slidesLength; i++) {
+   paginationHTML.push('<button class="slider_pagination_btn" data-index="' + i + '"></button>');
+}
+paginationElement.innerHTML = paginationHTML.join('');
+
+paginationElement.addEventListener('click', function(e) {
+   var target = e.target;
+   if (target.classList.contains("slider_pagination_btn")) {
+      newIndex = Number(target.getAttribute("data-index"));
+      navigateSlider();
+   }
+});
+
+var autoplay = true;
+var autoplayInterval = 4000;
+
+navigateSlider();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+
+ 
+
+
+<script>
+
+  var my_time;
+    var count = 0;
+    setTimeout('pageScroll()', 2400);
+    function pageScroll() {
+      // If condition to set repeat 
+      if (count < 21111) {
+        var objDiv = document.getElementById("data");
+        objDiv.scrollTop = objDiv.scrollTop + 1;
+        if (objDiv.scrollTop == (objDiv.scrollHeight - 1261)) {
+          setTimeout(function() {
+            objDiv.scrollTop = 0;
+            count++;
+            }, 1200);
+        }
+        //set scrolling time start
+        my_time = setTimeout('pageScroll()', 28);
+        //set scrolling time end
+      }
+    }
+
+</script>
+
+
+
+
+  <script>
+   function playPong() {
+  var pplayPong = document.getElementById("playPongplayPong");
+  var paddle_1paddle_1 = document.getElementById("paddle_1");
+  var paddle_2paddle_2 = document.getElementById("paddle_2");
+
+  if (paddle_1paddle_1.style.height == "100px") {
+    paddle_1paddle_1.style.opacity ="1";
+    paddle_2paddle_2.style.opacity ="1";
+     paddle_1paddle_1.style.height = "255px";
+    paddle_2paddle_2.style.height ="255px";
+
+ 
+
+
+    console.log("play pong")
+   this.gameState = "play"
+
+  } else {
+ 
+    /// gameState = "start"
+    paddle_1paddle_1.style.opacity ="0";
+    paddle_2paddle_2.style.opacity ="0";
+    paddle_1paddle_1.style.height = "100px";
+    paddle_2paddle_2.style.height ="100px";
+     console.log("stop pong")
+
+  }
+}
+  </script>
+
+
+
+</body>
+</html>
