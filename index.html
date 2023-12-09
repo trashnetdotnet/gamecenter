@@ -54,6 +54,15 @@ left:0;
     display: inline-block;
  }
 
+#cbgBreakout {
+margin: 0;
+padding:0;
+ z-index:9999;
+top:0;
+left:0;
+ }
+
+
 
 
 
@@ -447,6 +456,26 @@ background-color: #333;
    }
 
 
+
+
+#playBreakout { 
+  opacity: .5;
+display: block;
+position: fixed;
+z-index: 9999999999999999999099999;
+bottom: 30px;
+right: 50px;
+width:15px;
+height: 15px;
+background-color: #333;
+   }
+
+
+
+
+
+
+
    </style>
 
 
@@ -698,7 +727,7 @@ document.write(body);
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 <div id=container0>
-<div id=topbar0></div><canvas id="cbg"></canvas>
+<div id=topbar0></div><canvas id="cbg"></canvas><canvas id="cbgBreakout" style="display: none;"></canvas>
 <div class=bgbg id=big0>
 
 
@@ -1145,7 +1174,12 @@ SUPER MAGFEST
 
 
 
-<div id="playPongplayPong" onclick=playPong()> </div>
+<div id="playPongplayPong" onclick=playPong(); hideBreakout(); > </div>
+
+
+
+
+<div id="playBreakout" onclick=drawBreakout(); hidePong(); > </div>
 
  
   <div class="slider_pagination" style="display: none; "></div>
@@ -1185,7 +1219,8 @@ SUPER MAGFEST
 <script type="text/javascript" src="js/paint.js"></script>
 <script type="text/javascript" src="js/DeviceOrientationControls.js"></script>
  <script type="text/javascript" src="js/lineswords.js"></script>
-<!--  <script type="text/javascript" src="js/pong.js"></script> -->
+<!--   <script type="text/javascript" src="js/breakout.js"></script> 
+<script type="text/javascript" src="js/pong.js"></script> -->
 
 
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1262,6 +1297,33 @@ images.onload = notify();
 
 
 <script>
+
+
+  document.addEventListener("touchstart", touch2Mouse, true);
+document.addEventListener("touchmove", touch2Mouse, true);
+document.addEventListener("touchend", touch2Mouse, true);
+
+
+
+function touch2Mouse(e)
+{
+  var theTouch = e.changedTouches[0];
+  var mouseEv;
+
+  switch(e.type)
+  {
+    case "touchstart": mouseEv="mousedown"; break;  
+    case "touchend":   mouseEv="mouseup"; break;
+    case "touchmove":  mouseEv="mousemove"; break;
+    default: return;
+  }
+
+  var mouseEvent = document.createEvent("MouseEvent");
+  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
+  theTouch.target.dispatchEvent(mouseEvent);
+
+  e.preventDefault();
+}
 
 
 var currentIndex = 0;
@@ -1375,6 +1437,12 @@ navigateSlider();
 
   <script>
    function playPong() {
+
+    
+
+
+
+
   var pplayPong = document.getElementById("playPongplayPong");
   var paddle_1paddle_1 = document.getElementById("paddle_1");
   var paddle_2paddle_2 = document.getElementById("paddle_2");
@@ -1392,7 +1460,9 @@ navigateSlider();
    this.gameState = "play"
 
   } else {
- 
+   var cbgBreakoutcbgBreakout = document.getElementById("cbgBreakout");
+     cbgBreakoutcbgBreakout.style.display = "none";
+
     /// gameState = "start"
     paddle_1paddle_1.style.opacity ="0";
     paddle_2paddle_2.style.opacity ="0";
@@ -1402,6 +1472,891 @@ navigateSlider();
 
   }
 }
+  </script>
+
+
+
+  <script>
+
+
+
+
+
+
+
+
+
+
+ d3.ns.prefix.custom = "https://d3js.org/namespace/custom";
+
+var width = window.innerWidth,
+    height = window.innerHeight;
+ 
+// Add our "custom" sketch element to the body.
+var sketch = d3.select("div#big0").append("custom:sketch")
+        .attr("width", width)
+        .attr("height", height)
+
+
+    .call(custom);
+
+
+
+// On each mouse move, create a circle that increases in size and fades away.
+
+      var mouseX;
+      var mouseY;
+
+// get the ball coordinates from the pong game 11/5/23
+/*
+ 
+var ballball = document.getElementById('ball');
+var ballballpos = ballball.getBoundingClientRect();
+var ballballx = ballballpos.left;
+var ballbally = ballballpos.top;
+console.log(ballball);    
+console.log(ballballpos);    
+console.log(ballballx);    
+console.log(ballbally);    
+
+*/
+
+
+ ////////document.addEventListener("mousemove", mousemovecircles, false);
+ //////////document.addEventListener("mousedown", mousemovecirclesDown, false);
+
+ 
+
+ var canvasBGBreakout;
+
+ var canvasBG;
+
+ var canvasWidthpxBreakout = window.innerWidth + "px",
+    canvasHeightpxBreakout = window.innerHeight + "px";
+
+ var canvasWidthpx = window.innerWidth + "px",
+    canvasHeightpx = window.innerHeight + "px";
+
+
+ var canvasWidth = window.innerWidth,
+    canvasHeight = window.innerHeight;
+
+ 
+var context;
+var ctxBG;
+var ctxBGBreakout;
+
+  canvasBGBreakout = document.getElementById('cbgBreakout');
+
+  canvasBG = document.getElementById('cbg');
+
+/////console.log(canvasBG);
+    canvasBG.style.display = "inline-block";
+    canvasBG.style.position = "fixed";
+    canvasBG.setAttribute('width', canvasWidthpx);
+    canvasBG.setAttribute('height', canvasHeightpx);
+
+
+
+    canvasBGBreakout.style.position = "fixed";
+    canvasBGBreakout.setAttribute('width', canvasWidthpx);
+    canvasBGBreakout.setAttribute('height', canvasHeightpx);
+
+
+
+var ctxBG = canvasBG.getContext('2d');
+ 
+ 
+var ctxBGBreakout = canvasBGBreakout.getContext('2d');
+ 
+ 
+
+//console.log(canvasWidth);
+////console.log(canvasHeight);
+
+
+
+/*
+var img = document.createElement('IMG');
+    ///  ctxBG.fillStyle = 'black';
+    ctxBG.fillRect(0, 0, canvasWidth, canvasHeight);
+
+   ctxBG.beginPath();
+    ctxBG.drawImage(img, 0, 0);
+    ctxBG.closePath();    
+    ctxBG.globalCompositeOperation = 'destination-out';    
+ 
+img.src = "images/3spotgrunge_trans.png";
+    
+*/
+
+var hideB=0;
+
+
+
+function hidePong() {
+
+hideB=1;
+          document.getElementById('board').style.display = 'none'; 
+          console.log("hide pong");
+
+}
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////
+///// pong /////
+///////////////////////////////////////////////
+
+
+let gameState = 'start'; 
+/////let gameState = 'play'; 
+
+let paddle_1 = document.querySelector('.paddle_1'); 
+
+let paddle_2 = document.querySelector('.paddle_2'); 
+
+let board = document.querySelector('.board'); 
+
+let initial_ball = document.querySelector('.ball'); 
+
+let ball = document.querySelector('.ball'); 
+
+let score_1 = document.querySelector('.player_1_score'); 
+
+let score_2 = document.querySelector('.player_2_score'); 
+
+let message = document.querySelector('.message'); 
+let paddle_1_coord = paddle_1.getBoundingClientRect(); 
+let paddle_2_coord = paddle_2.getBoundingClientRect(); 
+let initial_ball_coord = ball.getBoundingClientRect(); 
+let ball_coord = initial_ball_coord; 
+let board_coord = board.getBoundingClientRect(); 
+ let paddle_common =  document.querySelector('.paddle').getBoundingClientRect(); 
+ 
+  
+let dx = Math.floor(Math.random() * 4) + 3; 
+let dy = Math.floor(Math.random() * 4) + 3; 
+let dxd = Math.floor(Math.random() * 2); 
+let dyd = Math.floor(Math.random() * 2); 
+
+  
+
+document.addEventListener('keydown', (e) => { 
+
+if (e.key == 'Enter') { 
+
+    gameState = gameState == 'start' ? 'play' : 'start'; 
+
+    if (gameState == 'play') { 
+
+    message.innerHTML = 'Game Started'; 
+
+    message.style.left = 42 + 'vw'; 
+
+    requestAnimationFrame(() => { 
+
+        dx = Math.floor(Math.random() * 4) + 3; 
+
+        dy = Math.floor(Math.random() * 4) + 3; 
+
+        dxd = Math.floor(Math.random() * 2); 
+
+        dyd = Math.floor(Math.random() * 2); 
+
+        moveBall(dx, dy, dxd, dyd); 
+         mousemovecircles(dx, dy, dxd, dyd); 
+
+
+    }); 
+
+    } 
+} 
+
+if (gameState == 'play') { 
+
+    if (e.key == 'w') { 
+
+    paddle_1.style.top = 
+
+        Math.max( 
+
+        board_coord.top, 
+
+        paddle_1_coord.top - window.innerHeight * 0.06 
+
+        ) + 'px'; 
+
+    paddle_1_coord = paddle_1.getBoundingClientRect(); 
+
+    } 
+
+    if (e.key == 's') { 
+
+    paddle_1.style.top = 
+
+        Math.min( 
+
+        board_coord.bottom - paddle_common.height, 
+
+        paddle_1_coord.top + window.innerHeight * 0.06 
+
+        ) + 'px'; 
+
+    paddle_1_coord = paddle_1.getBoundingClientRect(); 
+
+    } 
+
+  
+
+    if (e.key == 'ArrowUp') { 
+
+    paddle_2.style.top = 
+
+        Math.max( 
+
+        board_coord.top, 
+
+        paddle_2_coord.top - window.innerHeight * 0.1 
+
+        ) + 'px'; 
+
+    paddle_2_coord = paddle_2.getBoundingClientRect(); 
+
+    } 
+
+    if (e.key == 'ArrowDown') { 
+
+    paddle_2.style.top = 
+
+        Math.min( 
+
+        board_coord.bottom - paddle_common.height, 
+
+        paddle_2_coord.top + window.innerHeight * 0.1 
+
+        ) + 'px'; 
+
+    paddle_2_coord = paddle_2.getBoundingClientRect(); 
+
+    } 
+} 
+}); 
+
+  
+
+function moveBall(dx, dy, dxd, dyd) { 
+
+if (ball_coord.top <= board_coord.top) { 
+
+    dyd = 1; 
+} 
+
+if (ball_coord.bottom >= board_coord.bottom) { 
+
+    dyd = 0; 
+} 
+
+if ( 
+
+    ball_coord.left <= paddle_1_coord.right && 
+
+    ball_coord.top >= paddle_1_coord.top && 
+
+    ball_coord.bottom <= paddle_1_coord.bottom 
+) { 
+
+    dxd = 1; 
+
+    dx = Math.floor(Math.random() * 4) + 3; 
+
+    dy = Math.floor(Math.random() * 4) + 3; 
+} 
+
+if ( 
+
+    ball_coord.right >= paddle_2_coord.left && 
+
+    ball_coord.top >= paddle_2_coord.top && 
+
+    ball_coord.bottom <= paddle_2_coord.bottom 
+) { 
+
+    dxd = 0; 
+
+    dx = Math.floor(Math.random() * 4) + 3; 
+
+    dy = Math.floor(Math.random() * 4) + 3; 
+} 
+
+if ( 
+
+    ball_coord.left <= board_coord.left || 
+
+    ball_coord.right >= board_coord.right 
+) { 
+
+    if (ball_coord.left <= board_coord.left) { 
+
+
+
+    dxd = 1; 
+
+    dx = Math.floor(Math.random() * 4) + 3; 
+
+    dy = Math.floor(Math.random() * 4) + 3; 
+
+
+
+
+    score_2.innerHTML = +score_2.innerHTML + 1; 
+
+    } else { 
+
+    score_1.innerHTML = +score_1.innerHTML + 1; 
+
+    dxd = 0; 
+
+    dx = Math.floor(Math.random() * 4) + 3; 
+
+    dy = Math.floor(Math.random() * 4) + 3; 
+    } 
+
+   /* gameState = 'start'; 
+
+  
+
+    ball_coord = initial_ball_coord; 
+
+    ball.style = initial_ball.style; 
+
+    message.innerHTML = 'Press Enter to Play Pong'; 
+
+    message.style.left = 38 + 'vw'; 
+
+*/
+
+ball.style.top = ball_coord.top + dy * (dyd == 0 ? -1 : 1) + 'px'; 
+
+ball.style.left = ball_coord.left + dx * (dxd == 0 ? -1 : 1) + 'px'; 
+ball_coord = ball.getBoundingClientRect(); 
+requestAnimationFrame(() => { 
+
+    moveBall(dx, dy, dxd, dyd); 
+
+         mousemovecircles(dx, dy, dxd, dyd); 
+
+}); 
+
+if (hideB==1) {cancelAnimationFrame();} else { hideB=0;   return;  }
+} 
+
+ball.style.top = ball_coord.top + dy * (dyd == 0 ? -1 : 1) + 'px'; 
+
+ball.style.left = ball_coord.left + dx * (dxd == 0 ? -1 : 1) + 'px'; 
+ball_coord = ball.getBoundingClientRect(); 
+requestAnimationFrame(() => { 
+
+    moveBall(dx, dy, dxd, dyd); 
+
+         mousemovecircles(dx, dy, dxd, dyd); 
+
+}); 
+} 
+
+
+
+
+
+
+
+
+
+function mousemovecirclesload() {
+
+    for(var loc3 = 1; loc3 < 2; loc3++) {
+
+
+  sketch.append("custom:circle")
+    .attr("x", ((width/2)*loc3))
+    .attr("y", ((height/2)*loc3))
+ ///       .attr("x", ball_coord.x)
+ ///       .attr("y", ball_coord.y)
+
+
+      
+      .attr("radius", 0)
+      .attr("strokeStyle", "#ffd200")
+    .transition()
+      .duration(6666)
+      .ease(Math.sqrt)
+      .attr("radius", 666)
+      .attr("strokeStyle", "#828282")
+      .remove();
+
+/*
+     var grd = ctxBG.createRadialGradient((width/2)*loc3, (height/2)*loc3, 0, (width/2)*loc3, (height/2)*loc3, 96);
+    grd.addColorStop(0, "rgba(255,255,255,.6)"); 
+    grd.addColorStop(1, "transparent"); 
+    ctxBG.fillStyle = grd;
+    ctxBG.beginPath();
+    ctxBG.arc((width/2)*loc3,(height/2)*loc3,96,0,Math.PI*2,true);
+    ctxBG.fill();
+    ctxBG.closePath();
+    */
+     
+       }
+   
+      loc3=25;
+
+
+
+
+
+         
+
+
+
+};
+
+
+//function mousemovecircles(event) {
+function mousemovecircles() {
+
+
+
+  sketch.append("custom:circle")
+
+  
+
+ //////// the mouse move event version
+ //       .attr("x", event.clientX)
+//      .attr("y", event.clientY)
+///////////////////////////////////////
+
+      .attr("x", ball_coord.x)
+      .attr("y", ball_coord.y)
+      .attr("radius", 0)
+      .attr("strokeWidth", "10px")
+      .attr("strokeStyle", "#ffd200")
+    .transition()
+      .duration(666)
+      .ease(Math.sqrt)
+      .attr("radius", 200)
+        .attr("strokeWidth", "10px")
+    .attr("strokeStyle", "black")
+      .remove();
+
+
+
+   ////       var grd = ctxBG.createRadialGradient(event.clientX, event.clientY, 0, event.clientX, event.clientY, 96);
+      /*
+         var grd = ctxBG.createRadialGradient(ball_coord.x, ball_coord.y, 0, dx, dy, 96);
+    grd.addColorStop(0, "rgba(255,255,255,.6)"); 
+    grd.addColorStop(1, "transparent"); 
+    ctxBG.fillStyle = grd;
+    ctxBG.beginPath();
+  ////  ctxBG.arc(event.clientX,event.clientY,96,0,Math.PI*2,true);
+    ctxBG.arc(ball_coord.x,ball_coord.y,96,0,Math.PI*2,true);
+    ctxBG.fill();
+    ctxBG.closePath();
+*/
+
+//console.log(ball_coord.x);    
+///console.log(ball_coord.y);   
+
+};
+
+
+
+
+
+/////function mousemovecirclesDown(event) {
+function mousemovecirclesDown() {
+
+
+
+  sketch.append("custom:circle")
+
+
+ //////// the mouse move event version
+ //       .attr("x", event.clientX)
+//      .attr("y", event.clientY)
+///////////////////////////////////////
+
+      .attr("x", ball_coord.x)
+      .attr("y", ball_coord.y)
+
+
+
+      .attr("radius", 0)
+      .attr("strokeStyle", "#ffd200")
+    .transition()
+      .duration(666)
+      .ease(Math.sqrt)
+      .attr("radius", 200)
+      .attr("strokeStyle", "#black")
+      .remove();
+      
+    var copy ="AU Game Center loves you";  
+      
+//////// sketch.append("custom:copy");
+
+//////// console.log(copy);
+ 
+};
+
+
+
+function custom(selection) {
+  selection.each(function() {
+    root = this,
+       canvasX = root.parentNode.appendChild(document.createElement("canvas")),
+        contextX = canvasX.getContext("2d");
+
+    canvasX.style.position = "absolute";
+    canvasX.style.top = root.offsetTop + "px";
+    canvasX.style.left = root.offsetLeft + "px";
+
+    canvasX.id = "breakoutArena";
+
+
+
+
+    // It'd be nice to use DOM Mutation Events here instead.
+    // However, they appear to arrive irregularly, causing choppy animation.
+    d3.timer(redraw);
+
+    // Clear the canvas and then iterate over child elements.
+    function redraw() {
+ 
+        var sketchwidth = sketch.clientWidth;
+        var sketchheight = sketch.clientHeight;
+
+/////////////      canvasX.width = root.getAttribute("width");
+/////////////      canvasX.height = root.getAttribute("height");
+
+      canvasX.width = window.innerWidth;
+      canvasX.height = window.innerHeight;
+/////// canvasBG.width = window.innerWidth;
+    ////canvasBG.height = window.innerHeight;
+
+ 
+      for (var child = root.firstChild; child; child = child.nextSibling) draw(child);
+    }
+
+
+
+    // Clear the canvas and then iterate over child elements.
+    function resredraw() {
+ 
+        var sketchwidth = sketch.clientWidth;
+        var sketchheight = sketch.clientHeight;
+
+/////////////      canvasX.width = root.getAttribute("width");
+/////////////      canvasX.height = root.getAttribute("height");
+
+      canvasX.width = window.innerWidth;
+      canvasX.height = window.innerHeight;
+ canvasBG.width = window.innerWidth;
+    canvasBG.height = window.innerHeight;
+
+
+ canvasBGBreakout.width = window.innerWidth;
+    canvasBGBreakout.height = window.innerHeight;
+
+
+
+
+
+/*
+var img = document.createElement('IMG');
+      ctxBG.fillStyle = 'black';
+     ctxBG.fillRect(0, 0, window.innerWidth, window.innerHeight);
+ 
+   ctxBG.beginPath();
+    ctxBG.drawImage(img, 0, 0);
+    ctxBG.closePath();    
+    ctxBG.globalCompositeOperation = 'destination-out';    
+ 
+img.src = "images/3spotgrunge.jpg";
+    
+*/
+ 
+     }
+
+
+
+
+      
+ 
+
+    // For now we only support circles with strokeStyle.
+    // But you should imagine extending this to arbitrary shapes and groups!
+    function draw(element) {
+      switch (element.tagName) {
+        case "circle": {
+          contextX.strokeStyle = element.getAttribute("strokeStyle");
+          contextX.beginPath();
+          contextX.arc(element.getAttribute("x"), element.getAttribute("y"), element.getAttribute("radius"), 0, 2 * Math.PI);
+          contextX.stroke();
+          break;
+        }
+      }
+    }
+ 
+
+
+   
+   // Redraw based on the new size whenever the browser window is resized.
+   window.addEventListener("resize", resredraw, false);
+
+window.addEventListener('load', mousemovecirclesload, false);
+
+ });
+};
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////
+//////////// breakout //////////////////////
+/////////////////////////////////////////////
+
+
+
+var hideP=1;
+
+
+
+
+
+
+
+///var breakoutCanvas = document.getElementById("breakoutArena");
+var breakoutCanvas = canvasBGBreakout;
+
+/////var ctx = breakoutCanvas.getContext("2d");
+var ctx = ctxBGBreakout;
+var ballRadius = 6;
+/////var x = breakoutCanvas.width / 2;
+var x = breakoutCanvas.width;
+/////var y = breakoutCanvas.height - 30;
+var y = breakoutCanvas.height;
+var dxdx = 2;
+var dydy = -2;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (breakoutCanvas.width - paddleWidth) / 2;
+var rightPressed = false;
+var leftPressed = false;
+var brickRowCount = breakoutCanvas.width/75;
+//////var brickRowCount = 5;
+var brickColumnCount = 2;
+///var brickColumnCount = breakoutCanvas.width/75;
+
+
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 0;
+var brickOffsetLeft = 30;
+var score = 0;
+var lives = 3;
+var bricks = [];
+for (var c = 0; c < brickColumnCount; c++) {
+  bricks[c] = [];
+  for (var r = 0; r < brickRowCount; r++) {
+    bricks[c][r] = { x: 0, y: 0, status: 1 };
+  }
+}
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = true;
+  } else if (e.keyCode == 37) {
+    leftPressed = true;
+  }
+}
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = false;
+  } else if (e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
+function mouseMoveHandler(e) {
+  var relativeX = e.clientX - breakoutCanvas.offsetLeft;
+  if (relativeX > 0 && relativeX < breakoutCanvas.width) {
+    paddleX = relativeX - paddleWidth / 2;
+  }
+}
+function collisionDetection() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < brickRowCount; r++) {
+      var b = bricks[c][r];
+      if (b.status == 1) {
+        if (
+          x > b.x &&
+          x < b.x + brickWidth &&
+          y > b.y &&
+          y < b.y + brickHeight
+        ) {
+          dy = -dy;
+          b.status = 0;
+          score++;
+          if (score == brickRowCount * brickColumnCount) {
+            alert("YOU WIN, CONGRATS!");
+          /////  document.location.reload();
+          }
+        }
+      }
+    }
+  }
+}
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI * 4);
+  ctx.fillStyle = "green";
+  ctx.fill();
+  ctx.closePath();
+}
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddleX, breakoutCanvas.height - paddleHeight, paddleWidth, paddleHeight);
+  ctx.fillStyle = "#0095DD";
+  ctx.fill();
+  ctx.closePath();
+}
+function drawBricks() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < brickRowCount; r++) {
+      if (bricks[c][r].status == 1) {
+        var brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
+        var brickY = c * (brickHeight + brickPadding) + brickOffsetTop;
+        bricks[c][r].x = brickX;
+        bricks[c][r].y = brickY;
+        ctx.beginPath();
+        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+        ctx.closePath();
+       }
+    }
+  }
+}
+function drawScore() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "purple";
+  ctx.fillText("Score: " + score, 8, 20);
+}
+function drawLives() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "red";
+  ctx.fillText("Lives: " + lives, breakoutCanvas.width - 65, 20);
+}
+function draw() {
+  ctx.clearRect(0, 0, breakoutCanvas.width, breakoutCanvas.height);
+  drawBricks();
+  drawBall();
+  drawPaddle();
+  drawScore();
+  drawLives();
+  collisionDetection();
+  if (x + dxdx > breakoutCanvas.width - ballRadius || x + dxdx < ballRadius) {
+    dxdx = -dxdx;
+  }
+  if (y + dydy < ballRadius) {
+    dydy = -dydy;
+  } else if (y + dydy > breakoutCanvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dydy = -dydy;
+    } else {
+    //////  lives--;
+      lives--;
+      if (!lives) {
+       ///// alert("GAME OVER");
+       /////// document.location.reload();
+      } else {
+        x = breakoutCanvas.width;
+        y = breakoutCanvas.height;
+        dxdx = 3;
+        dydy = -3;
+        paddleX = (breakoutCanvas.width - paddleWidth) / 2;
+      }
+    }
+  }
+  if (rightPressed && paddleX < breakoutCanvas.width - paddleWidth) {
+    paddleX += 7;
+  } else if (leftPressed && paddleX > 0) {
+    paddleX -= 7;
+  }
+  x += dxdx;
+  y += dydy;
+
+
+
+
+
+  if (hideP==0) { cancelAnimationFrame(draw);
+} else {  requestAnimationFrame(draw);
+           mousemovecircles(dxdx, dydy, dxdx, dydy); 
+ }
+}
+////draw();
+
+
+
+
+
+
+function hideBreakout() {
+ 
+
+/////console.log(canvasBG);
+  var cbgBreakoutcbgBreakout = document.getElementById("cbgBreakout");
+ 
+    cbgBreakoutcbgBreakout.style.display = "none";
+
+hideP=0;
+console.log("hide breakout");
+
+}
+
+
+
+function drawBreakout () {
+ 
+  var cbgBreakoutcbgBreakout = document.getElementById("cbgBreakout");
+ 
+    cbgBreakoutcbgBreakout.style.display = "inline-block";
+
+/////console.log(canvasBG);
+ 
+hideP=1;
+draw();
+
+console.log("show breakout");
+
+}
+
+////////////////////////////
+///////////////////////////
+///////////////////////////////
+       
+        
   </script>
 
 
