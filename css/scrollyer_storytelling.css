@@ -3041,8 +3041,8 @@ background-size:cover;
    height: 100vh;
    /*  margin-left: 4em;
      margin-right: 4em; */
-    overflow-y: auto;
-  /*  overflow-x: hidden; */
+    overflow-y: hidden;
+   overflow-x: hidden;  /* */
 
 
  }
