@@ -111,10 +111,10 @@ padding:0;
    display:inline-block;
   position:fixed;
   
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 }
 
@@ -132,10 +132,10 @@ background-size:cover;
     background-size: cover;
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
  
 }
 
@@ -204,10 +204,10 @@ z-index:9999999;
 color:#555;
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -235,10 +235,10 @@ z-index:9999999;
 color:#555;
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -265,10 +265,10 @@ z-index:999999999;
 color:#555;
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -305,10 +305,10 @@ z-index:9999999;
   max-width:200px;
   font-weight: 400;
 line-height: normal;
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -334,10 +334,10 @@ z-index:9999999;
   max-width:200px;
   font-weight: 400;
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -363,10 +363,10 @@ z-index:999999999;
   max-width:200px;
   font-weight: 400;
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -746,10 +746,10 @@ min-width:300px;
 
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 margin-top: -3vh;
@@ -794,10 +794,10 @@ min-width:300px;
 
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 margin-top: -3vh;
 z-index: 999999999;
@@ -842,10 +842,10 @@ min-width:300px;
 
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 margin-top: -5vh;
@@ -928,10 +928,10 @@ text-transform: uppercase;
 
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
   max-width: 860px;
@@ -1834,10 +1834,10 @@ display: inline-block;position: absolute;z-index:999999999999;margin-left: -1.2e
 
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
  }
 
 
@@ -1855,10 +1855,10 @@ display: inline-block;position: absolute;z-index:999999999999;margin-left: -1.2e
 
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 }
 
@@ -1877,10 +1877,10 @@ display: inline-block;position: absolute;z-index:999999999999;margin-left: -1.2e
 
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 }
 
@@ -2039,10 +2039,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2072,10 +2072,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2104,10 +2104,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2160,10 +2160,10 @@ bottom: 26%;
   z-index: -9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2193,10 +2193,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2225,10 +2225,10 @@ top: 2%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2280,10 +2280,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2313,10 +2313,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2345,10 +2345,10 @@ bottom: 16%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2398,10 +2398,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2431,10 +2431,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2463,10 +2463,10 @@ top: 6%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2507,10 +2507,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2540,10 +2540,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2572,10 +2572,10 @@ bottom: 26%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2607,10 +2607,10 @@ top: 20%;
   z-index: 9;
  
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2758,10 +2758,10 @@ text-transform: uppercase;
 text-align: right;
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
  
 
@@ -2792,10 +2792,10 @@ font-weight: 500;
 
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
  
@@ -2824,10 +2824,10 @@ max-width:280px;
 padding-left: 0;
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -2852,10 +2852,10 @@ padding-left: 0;
 
 
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 }
 }
@@ -2880,10 +2880,10 @@ min-width:300px;
 padding-left: 0;
 cursor:pointer;
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 }
 }
@@ -2921,10 +2921,10 @@ background-size:cover;
 height: 100%;
   width: 100%;
     
-     -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+     /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 }
@@ -2963,10 +2963,10 @@ background-size:cover;
     max-width: 340px;*/
     width: 100%;
     height: 100%;
-     -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+     /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 
@@ -3010,10 +3010,10 @@ background-size:cover;
 
     width: 100%;
     height: 100%;
-     -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+     /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
 
@@ -3665,10 +3665,10 @@ color: #fff;
    text-align: left;
     opacity: 1 !important;
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
     -moz-osx-font-smoothing: grayscale;
@@ -3706,10 +3706,10 @@ color: #fff;
    text-align: left;
     opacity: 1 !important;
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
     -moz-osx-font-smoothing: grayscale;
@@ -3746,10 +3746,10 @@ color: #fff;
    text-align: left;
     opacity: 1 !important;
 
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  /* -webkit-user-select: none;  Chrome all / Safari all */
+/*   -moz-user-select: none;     Firefox all */
+/*   -ms-user-select: none;      IE 10+ */
+/*   user-select: none;          Likely future */      
 
 
     -moz-osx-font-smoothing: grayscale;
