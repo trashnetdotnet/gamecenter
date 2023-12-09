@@ -494,13 +494,13 @@ background-color: #333;
 <!-- |||| Uncomment to use vid & make changes to function  |||||||| -->
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  
-     |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+     |||||||||||||||||||||||||||||||||||
 
  <video autoplay playsinline muted loop id="bgvid7" class="videobig" style="display: none;">
      <source src="images/mia_x_nike_sb.webm" type="video/webm">
      <source src="images/mia_x_nike_sb.mp4" type="video/mp4">
 </video>
-
+||||||||||||||||||||||||||| -->
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1147,13 +1147,10 @@ SUPER MAGFEST
 
 
 
+<!--
 
-
-       <div class="slider_slide">
-
+<div class="slider_slide">
 <div id="slideWrapper">
-
-
 
  <video autoplay playsinline muted loop id="bgvid7" class="videobig" style="display: block;">
      <source src="images/mia_x_nike_sb.webm" type="video/webm">
@@ -1164,6 +1161,14 @@ SUPER MAGFEST
 </div>
 
    
+
+-->
+
+
+
+
+
+
 
 
 
@@ -1408,7 +1413,7 @@ function navigateSlider() {
    setTimeout(function() {
       newIndex++;
       console.log(newIndex)
-      if (newIndex==2) {autoplayInterval = 24000;} else if (newIndex==1) {autoplayInterval = 14000;} else if (newIndex==0) {autoplayInterval = 14000;}else if (newIndex==4) {autoplayInterval = 24000;} else if (newIndex==3) {autoplayInterval = 14000;} else {autoplayInterval = 14000;}
+      if (newIndex==2) {autoplayInterval = 24000;} else if (newIndex==1) {autoplayInterval = 14000;} else if (newIndex==0) {autoplayInterval = 14000;}else if (newIndex==5) {autoplayInterval = 24000;} else if (newIndex==3) {autoplayInterval = 14000;} else {autoplayInterval = 14000;}
       navigateSlider();
    }, autoplayInterval);
   clearTimeout(autoplay);
