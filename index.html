@@ -359,6 +359,41 @@ opacity: 0;
 
             z-index: 99999999999999999999999999;
                         opacity: 1;
+                          touch-action: none;
+
+  cursor: pointer;
+
+
+} 
+
+  
+.paddle_1paddle_1 { 
+
+  /*  top: calc(7.5vh + 55px); */
+  top: 0;
+
+    /* left: calc(10vw + 30px); */
+    left: calc(1px); 
+
+    box-shadow: inset 0 0 68px #fff, 
+
+        inset -6px 0 68px #f3bad6, 
+
+        inset 6px 0 68px #0ff, 
+
+        inset -6px 0 60px #f3bad6, 
+
+        inset 6px 0 60px #0ff, 
+
+        0 0 68px #fff, 4px 0 68px
+
+        #f3bad6, -4px 0 18px #0ff; 
+
+            z-index: 99999999999999999999999999;
+                        opacity: 1;
+                          touch-action: none;
+
+  cursor: pointer;
 
 
 } 
@@ -389,6 +424,43 @@ opacity: 0;
 
             z-index: 99999999999999999999999999;
             opacity: 1;
+              touch-action: none;
+  cursor: pointer;
+
+
+} 
+
+  
+
+.paddle_2paddle_2 { 
+
+  /*  top: calc(85vh + 7.5vh - 100px - 55px); */
+  top: 0;
+
+  /*  right: calc(10vw + 30px); */
+    right: calc(1px); 
+
+    box-shadow: inset 0 0 68px #fff, 
+
+        inset 6px 0 68px #f3bad6, 
+
+        inset -6px 0 68px #0ff, 
+
+        inset 6px 0 60px #f3bad6, 
+
+        inset -6px 0 60px #0ff, 
+
+        0 0 68px #fff, -4px 0 68px
+
+        #f3bad6, 4px 0 68px #0ff; 
+
+            z-index: 99999999999999999999999999;
+            opacity: 1;
+              touch-action: none;
+  cursor: pointer;
+height: 255px;
+width: 55px;
+opacity: 1;
 
 } 
 
@@ -1222,7 +1294,7 @@ SUPER MAGFEST
 
         <div class="paddle_1 paddle" id="paddle_1"></div> 
 
-        <div class="paddle_2  paddle" id="paddle_2"></div> 
+        <div class="paddle_2 paddle" id="paddle_2"></div> 
 
         <h1 class="player_1_score">0</h1> 
 
@@ -1362,32 +1434,12 @@ images.onload = notify();
 
 <script>
 
-
-  document.addEventListener("touchstart", touch2Mouse, true);
-document.addEventListener("touchmove", touch2Mouse, true);
-document.addEventListener("touchend", touch2Mouse, true);
+ 
 
 
 
-function touch2Mouse(e)
-{
-  var theTouch = e.changedTouches[0];
-  var mouseEv;
 
-  switch(e.type)
-  {
-    case "touchstart": mouseEv="mousedown"; break;  
-    case "touchend":   mouseEv="mouseup"; break;
-    case "touchmove":  mouseEv="mousemove"; break;
-    default: return;
-  }
 
-  var mouseEvent = document.createEvent("MouseEvent");
-  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
-  theTouch.target.dispatchEvent(mouseEvent);
-
-  e.preventDefault();
-}
 
 
 var currentIndex = 0;
@@ -1500,6 +1552,18 @@ navigateSlider();
 
 
   <script>
+
+
+
+
+
+
+
+
+
+
+
+
    function playPong() {
 
     
@@ -1512,12 +1576,26 @@ navigateSlider();
   var paddle_2paddle_2 = document.getElementById("paddle_2");
 
   if (paddle_1paddle_1.style.height == "100px") {
+
+  paddle_1paddle_1.className = "paddle_1paddle_1 paddle";
+paddle_2paddle_2.className = "paddle_2paddle_2 paddle";
+
     paddle_1paddle_1.style.opacity ="1";
     paddle_2paddle_2.style.opacity ="1";
      paddle_1paddle_1.style.height = "255px";
-    paddle_2paddle_2.style.height ="255px";
+     paddle_1paddle_1.style.width = "55px";
 
  
+    paddle_2paddle_2.style.height ="255px";
+    paddle_2paddle_2.style.width ="55px";
+
+/*
+
+    paddle_2paddle_2.style.boxShadow ="inset 0 0 68px #fff, inset 6px 0 68px #f3bad6, inset -6px 0 68px #0ff, inset 6px 0 60px #f3bad6, inset -6px 0 0 0 68px #fff, -4px 0 68px #f3bad6, 4px 0 68px #0ff";
+
+ 
+ */
+
 
 
     console.log("play pong")
@@ -1532,6 +1610,8 @@ navigateSlider();
     paddle_2paddle_2.style.opacity ="0";
     paddle_1paddle_1.style.height = "100px";
     paddle_2paddle_2.style.height ="100px";
+    paddle_1paddle_1.style.wiidth = "18px";
+    paddle_2paddle_2.style.width ="18px";
      console.log("stop pong")
 
   }
@@ -1677,13 +1757,28 @@ hideB=1;
 ///// pong /////
 ///////////////////////////////////////////////
 
-
+var shiftY;
+var shiftYY;
 let gameState = 'start'; 
 /////let gameState = 'play'; 
 
-let paddle_1 = document.querySelector('.paddle_1'); 
 
-let paddle_2 = document.querySelector('.paddle_2'); 
+
+
+  var paddle_1paddle_1paddle_1 = document.getElementById("paddle_1");
+  var paddle_2paddle_2paddle_2 = document.getElementById("paddle_2");
+
+
+
+let paddle_1 = document.getElementById('paddle_1'); 
+
+let paddle_2 = document.getElementById('paddle_2'); 
+
+
+
+///let paddle_1 = document.querySelector('.paddle_1'); 
+
+///let paddle_2 = document.querySelector('.paddle_2'); 
 
 let board = document.querySelector('.board'); 
 
@@ -1713,6 +1808,7 @@ let dyd = Math.floor(Math.random() * 2);
 
 document.addEventListener('keydown', (e) => { 
 
+
 if (e.key == 'Enter') { 
 
     gameState = gameState == 'start' ? 'play' : 'start'; 
@@ -1741,6 +1837,273 @@ if (e.key == 'Enter') {
 
     } 
 } 
+
+
+
+
+
+/*
+
+  function onThumbDown(e) {
+    e.preventDefault(); // prevent selection start (browser action)
+
+    shiftY = e.clientY - paddle_1_coord.top;
+    shiftYY = e.clientY - paddle_2_coord.top;
+
+    paddle_1paddle_1paddle_1.setPointerCapture(e.pointerId);
+    console.log(shiftY);
+    paddle_2paddle_2paddle_2.setPointerCapture(e.pointerId);
+    console.log(shiftYY);
+
+    paddle_1paddle_1paddle_1.onpointermove = onThumbMove;
+    paddle_2paddle_2paddle_2.onpointermove = onThumbMoveB;
+
+    paddle_1paddle_1paddle_1.onpointerup = e => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      paddle_1paddle_1paddle_1.onpointermove = null;
+      paddle_1paddle_1paddle_1.onpointerup = null;
+    }
+    paddle_2paddle_2paddle_2.onpointerup = e => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      paddle_2paddle_2paddle_2.onpointermove = null;
+      paddle_2paddle_2paddle_2.onpointerup = null;
+    }
+
+  };
+
+
+*/
+
+
+
+
+
+  function onThumbDown(e) {
+    e.preventDefault(); // prevent selection start (browser action)
+
+    shiftY = e.clientY - paddle_1_coord.top;
+   // shiftYY = e.clientY - paddle_2_coord.top;
+
+    paddle_1paddle_1paddle_1.setPointerCapture(e.pointerId);
+    console.log(shiftY);
+   // paddle_2paddle_2paddle_2.setPointerCapture(e.pointerId);
+   // console.log(shiftYY);
+
+    paddle_1paddle_1paddle_1.onpointermove = onThumbMove;
+   // paddle_2paddle_2paddle_2.onpointermove = onThumbMoveB;
+
+    paddle_1paddle_1paddle_1.onpointerup = e => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      paddle_1paddle_1paddle_1.onpointermove = null;
+      paddle_1paddle_1paddle_1.onpointerup = null;
+    }
+  //  paddle_2paddle_2paddle_2.onpointerup = e => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+    //  paddle_2paddle_2paddle_2.onpointermove = null;
+   //   paddle_2paddle_2paddle_2.onpointerup = null;
+   // }
+
+  };
+
+
+
+
+
+
+
+  function onThumbDownB(e) {
+    e.preventDefault(); // prevent selection start (browser action)
+
+    //shiftY = e.clientY - paddle_1_coord.top;
+    shiftYY = e.clientY - paddle_2_coord.top;
+
+   // paddle_1paddle_1paddle_1.setPointerCapture(e.pointerId);
+   // console.log(shiftY);
+    paddle_2paddle_2paddle_2.setPointerCapture(e.pointerId);
+    console.log(shiftYY);
+
+ //   paddle_1paddle_1paddle_1.onpointermove = onThumbMove;
+    paddle_2paddle_2paddle_2.onpointermove = onThumbMoveB;
+
+ /*   paddle_1paddle_1paddle_1.onpointerup = e => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      paddle_1paddle_1paddle_1.onpointermove = null;
+      paddle_1paddle_1paddle_1.onpointerup = null;
+    } */
+    paddle_2paddle_2paddle_2.onpointerup = e => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      paddle_2paddle_2paddle_2.onpointermove = null;
+      paddle_2paddle_2paddle_2.onpointerup = null;
+    }
+
+  };
+
+
+
+
+
+/*
+  function onThumbMove(e) {
+    let newTop = e.clientY - shiftY - board_coord.top;
+    let newTop2 = e.clientY - shiftYY - board_coord.top;
+
+    // if the pointer is out of slider => adjust left to be within the boundaries
+    if (newTop < 0) {
+      newTop = 0;
+    }  
+    if (newTop2 < 0) {
+      newTop2 = 0;
+    }
+
+    let bottomEdge = board.offsetHeight - paddle_1paddle_1paddle_1.offsetHeight;
+    let bottomEdge2 = board.offsetHeight - paddle_2paddle_2paddle_2.offsetHeight;
+
+
+
+ if (newTop > bottomEdge) {
+      newTop = bottomEdge;
+    }
+
+    paddle_1paddle_1paddle_1.style.top = newTop+ 'px';
+    paddle_1_coord = paddle_1.getBoundingClientRect(); 
+
+    paddle_2paddle_2paddle_2.style.top = newTop2 + 'px';
+    paddle_2_coord = paddle_2.getBoundingClientRect(); 
+
+
+  };
+
+*/
+
+
+
+
+
+
+  function onThumbMove(e) {
+let newTop = e.clientY - shiftY - board_coord.top;
+   //     let newTop2 = e.clientY - shiftYY - board_coord.top;
+
+    // if the pointer is out of slider => adjust left to be within the boundaries
+   if (newTop < 0) {
+    newTop = 0;
+  }  
+ //    if (newTop2 < 0) {
+ //       newTop2 = 0;
+//      }
+
+  let bottomEdge = board.offsetHeight - paddle_1paddle_1paddle_1.offsetHeight;
+//      let bottomEdge2 = board.offsetHeight - paddle_2paddle_2paddle_2.offsetHeight;
+
+
+
+ if (newTop > bottomEdge) {
+      newTop = bottomEdge;
+    }
+
+  paddle_1paddle_1paddle_1.style.top = newTop+ 'px';
+  paddle_1_coord = paddle_1.getBoundingClientRect(); 
+
+  //    paddle_2paddle_2paddle_2.style.top = newTop2 + 'px';
+ //     paddle_2_coord = paddle_2.getBoundingClientRect(); 
+
+
+  };
+
+
+
+
+
+  function onThumbMoveB(e) {
+  //  let newTop = e.clientY - shiftY - board_coord.top;
+    let newTop2 = e.clientY - shiftYY - board_coord.top;
+
+    // if the pointer is out of slider => adjust left to be within the boundaries
+ //   if (newTop < 0) {
+ //     newTop = 0;
+//    }  
+    if (newTop2 < 0) {
+      newTop2 = 0;
+    }
+
+//    let bottomEdge = board.offsetHeight - paddle_1paddle_1paddle_1.offsetHeight;
+    let bottomEdge2 = board.offsetHeight - paddle_2paddle_2paddle_2.offsetHeight;
+
+
+
+// if (newTop > bottomEdge) {
+ //     newTop = bottomEdge;
+ //   }
+
+ if (newTop2 > bottomEdge2) {
+      newTop2 = bottomEdge2;
+    }
+
+  //  paddle_1paddle_1paddle_1.style.top = newTop+ 'px';
+ //   paddle_1_coord = paddle_1.getBoundingClientRect(); 
+
+    paddle_2paddle_2paddle_2.style.top = newTop2 + 'px';
+    paddle_2_coord = paddle_2.getBoundingClientRect(); 
+
+
+  };
+
+
+
+
+
+paddle_1paddle_1paddle_1.onpointerdown = onThumbDown;
+  paddle_1paddle_1paddle_1.ondragstart = () => false;
+  // 
+ //
+  paddle_2paddle_2paddle_2.onpointerdown = onThumbDownB;
+  paddle_2paddle_2paddle_2.ondragstart = () => false;
+
+
+
+
+
+
+
+
+/*
+
+
+
+   paddle_1.addEventListener('pointermove', function (e) { 
+    console.log(paddle_1);
+
+
+      /////  e.preventDefault(); // prevent selection start (browser action)
+
+   if (onpointerdown) { 
+
+     let newY = e.clientY - oldY; 
+     if (newY >= 0 && newY <= (elem.offsetHeight - board.offsetHeight)) { 
+       paddle_1.style.top = newY + 'px'; 
+     } 
+   } 
+ }, false); 
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
 
 if (gameState == 'play') { 
 
