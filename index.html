@@ -1211,7 +1211,7 @@ What does online community look like in the age of social networking? How do par
 <div id="bigBox" style="width: 50%;">
 
 <div class="scroll-blk">
-<div class="scroll-text" id="data">
+<div class="scroll-text" id="dataB">
 
   <span class="introbody" style="padding-left: 3em;padding-top: 3em; ">
 
@@ -1377,13 +1377,14 @@ Teaching at AU: I most frequently teach Artificial Intelligence (CSC-468/668) an
   
 Dr. Mark J. Nelson
 <br />
-<span style="font-size: .3em !important; line-height: 1.8em !important; ">Assistant Professor & Undergraduate Director
+<span style="font-size: .3em !important; line-height: 1.6em !important; ">Assistant Professor & Undergraduate Director
 Department of Computer Science
 </span>
 
 <br />
+<br />
  
-<img src="images/m_nelson.png" border="0" alt="Dr. Andrew Andy Phelps" style="vertical-align: middle;width: 50%; ">
+<img src="images/m_nelson.png" border="0" alt="Dr. Andrew Andy Phelps" style="vertical-align: middle;width: 40%; ">
 </div>
 
 
@@ -1393,6 +1394,106 @@ Department of Computer Science
 
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="slider_slide">
+<div id="slideWrapper">
+
+<div id="bigBox" style="width: 50%;">
+
+ 
+  <span class="introbody" style="padding-left: 3em;padding-top: 3em; ">
+
+Dr. Krzysztof Pietroszek is a Polish/Canadian filmmaker, game designer, and computer scientist, and a professor in the Film and Media Arts Division of the School of Communication at American University in Washington, D.C. Krzysztof wrote and directed one of the first volumetric (holographic) fiction films ever made, Vera (volumetric), as well as a number award-winning short films, and produced a theatrically-distributed feature film "Waiting for Summer". Krzysztof is a voting member of the Academy of Canadian Cinema & Television (known as Canadian Oscar's Academy).
+<br /><br /> 
+
+Selected Publications:
+<br /> 
+
+<br /> 
+
+
+
+
+K Czarnecki, K Pietroszek (2006). Verifying feature-based model templates against well-formedness OCL constraints. Proceedings of the 5th international conference on Generative programming and component engineering. (pp. 211-220) 
+
+
+<br /> 
+
+<br /> 
+
+
+K Czarnecki, M Antkiewicz, CHP Kim, S Lau, K Pietroszek (2005). Model-driven software product lines. Companion to the 20th annual ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications. (pp. 126-127)  
+
+<br /> 
+
+<br /> 
+
+
+
+K Katsuragawa, K Pietroszek, JR Wallace, E Lank (2016). Watchpoint: Freehand pointing with a smartwatch in a ubiquitous display environment. Proceedings of the International Working Conference on Advanced Visual Interfaces. (pp. 128-135)   
+
+<br /> 
+
+<br /> 
+
+D Kharlamov, B Woodard, L Tahai, K Pietroszek (2016). TickTockRay: smartwatch-based 3D pointing for smartphone-based virtual reality. Proceedings of the 22nd ACM Conference on Virtual Reality Software and Technology. (pp. 365-366)  
+
+<br /> 
+
+<br /> 
+
+K Czarnecki, M Antkiewicz, CHP Kim, S Lau, K Pietroszek (2005). fmp and fmp 2 rsm: eclipse plug-ins for modeling features using model templates. OOPSLA Companion 2005, 200-201 
+
+<br /> 
+
+<br /> 
+
+K Pietroszek, JR Wallace, E Lank (2015). Tiltcasting: 3D interaction on large displays using a mobile device. Proceedings of the 28th Annual ACM Symposium on User Interface Software & Technology. (pp. 57-62)
+
+</span> 
+
+      </div>
+ 
+<div class="titleopener" style="width: 50% !important;padding-left: .2em; ">
+  
+Dr. Krzysztof Pietroszek
+<br />
+<span style="font-size: .3em !important; line-height: 1.6em !important; ">Associate Professor
+Film and Media Arts
+</span>
+
+<br />
+<br />
+ 
+<img src="images/m_nelson.png" border="0" alt="Dr. Andrew Andy Phelps" style="vertical-align: middle;width: 40%; ">
+</div>
+
+
+</div>
+</div>
+
+
+
+ 
+
+
+
+
+
 
 
 
@@ -1644,7 +1745,7 @@ function navigateSlider() {
    setTimeout(function() {
       newIndex++;
       console.log(newIndex)
-      if (newIndex==2) {autoplayInterval = 24000;} else if (newIndex==1) {autoplayInterval = 14000;} else if (newIndex==0) {autoplayInterval = 14000;}else if (newIndex==5) {autoplayInterval = 24000;} else if (newIndex==3) {autoplayInterval = 14000;} else {autoplayInterval = 14000;}
+      if (newIndex==2) {autoplayInterval = 24000;} else if (newIndex==1) {autoplayInterval = 14000;} else if (newIndex==0) {autoplayInterval = 14000;}else if (newIndex==5) {autoplayInterval = 14000;} else if (newIndex==3) {autoplayInterval = 14000;} else {autoplayInterval = 14000;}
       navigateSlider();
    }, autoplayInterval);
   clearTimeout(autoplay);
@@ -1693,35 +1794,6 @@ navigateSlider();
 
 
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-
-
- 
-
-
-<script>
-
-  var my_time;
-    var count = 0;
-    setTimeout('pageScroll()', 2400);
-    function pageScroll() {
-      // If condition to set repeat 
-      if (count < 21111) {
-        var objDiv = document.getElementById("data");
-        objDiv.scrollTop = objDiv.scrollTop + 1;
-        if (objDiv.scrollTop == (objDiv.scrollHeight - 1261)) {
-          setTimeout(function() {
-            objDiv.scrollTop = 0;
-            count++;
-            }, 1200);
-        }
-        //set scrolling time start
-        my_time = setTimeout('pageScroll()', 28);
-        //set scrolling time end
-      }
-    }
-
-</script>
-
 
 
 
@@ -2959,6 +3031,71 @@ console.log("show breakout");
        
         
   </script>
+
+
+
+
+<script>
+window.onload = function() {
+  scrollDiv_init();
+};
+ScrollRate = 10;
+function scrollDiv_init() {
+  var DivElmnt = document.getElementById('dataB');
+
+  var ReachedMaxScroll = false;
+  DivElmnt.scrollTop = 0;
+ var  PreviousScrollTop  = 0;
+  var ScrollInterval = setInterval('scrollDiv()', ScrollRate);
+}
+function scrollDiv() {
+  if (!ReachedMaxScroll) {
+    DivElmnt.scrollTop = PreviousScrollTop;
+    PreviousScrollTop++;
+    ReachedMaxScroll = DivElmnt.scrollTop >= (DivElmnt.scrollHeight - DivElmnt.offsetHeight);
+  }
+  else {
+    DivElmnt.scrollTop = PreviousScrollTop = 0;
+    ReachedMaxScroll = false;
+/*
+    ReachedMaxScroll = (DivElmnt.scrollTop == 0)?false:true;
+    DivElmnt.scrollTop = PreviousScrollTop;
+    PreviousScrollTop--;
+*/
+  }
+
+        
+  </script>
+
+
+ 
+
+
+<script>
+
+  var my_time;
+    var count = 0;
+    setTimeout('pageScroll()', 2400);
+    function pageScroll() {
+      // If condition to set repeat 
+      if (count < 21111) {
+        var objDiv = document.getElementById("data");
+        objDiv.scrollTop = objDiv.scrollTop + 1;
+        if (objDiv.scrollTop == (objDiv.scrollHeight - 1261)) {
+          setTimeout(function() {
+            objDiv.scrollTop = 0;
+            count++;
+            }, 1200);
+        }
+        //set scrolling time start
+        my_time = setTimeout('pageScroll()', 28);
+        //set scrolling time end
+      }
+    }
+
+</script>
+
+
 
 
 
